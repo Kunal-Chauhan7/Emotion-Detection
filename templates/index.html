@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Detection</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Emotion Detection</h1>
+        <form action="/predict" method="post">
+            <textarea name="text" rows="1" cols="30" placeholder="Enter text here..."></textarea><br><br>
+            <input type="submit" value="Predict Emotion">
+        </form>
+
+        {% if prediction %}
+        <div class="results">
+            <h2>Results</h2>
+            <p><strong>Original Text:</strong> {{ text }}</p>
+            <p><strong>Prediction:</strong> {{ prediction }}</p>
+            <p><strong>Prediction Probability:</strong></p>
+            <ul>
+                {% for label, prob in probability %}
+                    <li>{{ label }}: {{ prob }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
